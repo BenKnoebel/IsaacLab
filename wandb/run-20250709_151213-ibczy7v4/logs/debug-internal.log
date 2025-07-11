@@ -1,0 +1,6 @@
+{"time":"2025-07-09T15:12:13.554955349+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-09T15:12:13.831749699+02:00","level":"INFO","msg":"stream: created new stream","id":"ibczy7v4"}
+{"time":"2025-07-09T15:12:13.831811383+02:00","level":"INFO","msg":"stream: started","id":"ibczy7v4"}
+{"time":"2025-07-09T15:12:13.83182598+02:00","level":"INFO","msg":"sender: started","stream_id":"ibczy7v4"}
+{"time":"2025-07-09T15:12:13.831828625+02:00","level":"INFO","msg":"handler: started","stream_id":"ibczy7v4"}
+{"time":"2025-07-09T15:12:13.831849133+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"ibczy7v4"}

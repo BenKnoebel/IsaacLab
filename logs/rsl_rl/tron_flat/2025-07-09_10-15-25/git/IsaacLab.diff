@@ -1,0 +1,95 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   scripts/tutorials/00_sim/create_empty.py
+	modified:   scripts/tutorials/00_sim/spawn_prims.py
+	modified:   source/isaaclab_assets/isaaclab_assets/robots/__init__.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	assets/
+	source/isaaclab_assets/isaaclab_assets/robots/limx.py
+	source/isaaclab_assets/robots/
+	source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/agents/
+	source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/rough_env_cfg.py
+	source/isaaclab_tasks/isaaclab_tasks/manager_based/locomotion/velocity/config/tron/
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/scripts/tutorials/00_sim/create_empty.py b/scripts/tutorials/00_sim/create_empty.py
+index f35a0d5487..9f59fedfd0 100644
+--- a/scripts/tutorials/00_sim/create_empty.py
++++ b/scripts/tutorials/00_sim/create_empty.py
+@@ -41,7 +41,7 @@ def main():
+     sim_cfg = SimulationCfg(dt=0.01)
+     sim = SimulationContext(sim_cfg)
+     # Set main camera
+-    sim.set_camera_view([2.5, 2.5, 2.5], [0.0, 0.0, 0.0])
++    sim.set_camera_view([0, 0, 2.5], [0.0, 0.0, 0.0])
+ 
+     # Play the simulator
+     sim.reset()
+diff --git a/scripts/tutorials/00_sim/spawn_prims.py b/scripts/tutorials/00_sim/spawn_prims.py
+index 673e90f970..23197a5435 100644
+--- a/scripts/tutorials/00_sim/spawn_prims.py
++++ b/scripts/tutorials/00_sim/spawn_prims.py
+@@ -57,12 +57,15 @@ def design_scene():
+         radius=0.15,
+         height=0.5,
+         visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(1.0, 0.0, 0.0)),
++        physics_material=sim_utils.DeformableBodyMaterialCfg(),
+     )
+     cfg_cone.func("/World/Objects/Cone1", cfg_cone, translation=(-1.0, 1.0, 1.0))
+     cfg_cone.func("/World/Objects/Cone2", cfg_cone, translation=(-1.0, -1.0, 1.0))
+ 
+     # spawn a green cone with colliders and rigid body
+-    cfg_cone_rigid = sim_utils.ConeCfg(
++    
++    """ 
++      cfg_cone_rigid = sim_utils.ConeCfg(
+         radius=0.15,
+         height=0.5,
+         rigid_props=sim_utils.RigidBodyPropertiesCfg(),
+@@ -72,7 +75,8 @@ def design_scene():
+     )
+     cfg_cone_rigid.func(
+         "/World/Objects/ConeRigid", cfg_cone_rigid, translation=(-0.2, 0.0, 2.0), orientation=(0.5, 0.0, 0.5, 0.0)
+-    )
++    ) 
++    """
+ 
+     # spawn a blue cuboid with deformable body
+     cfg_cuboid_deformable = sim_utils.MeshCuboidCfg(
+@@ -105,11 +109,15 @@ def main():
+     # Now we are ready!
+     print("[INFO]: Setup complete...")
+ 
+-    # Simulate physics
++
+     while simulation_app.is_running():
+-        # perform step
+         sim.step()
+ 
++    # Simulate physics
++    #while simulation_app.is_running():
++        # perform step
++        # sim.step()
++
+ 
+ if __name__ == "__main__":
+     # run the main function
+diff --git a/source/isaaclab_assets/isaaclab_assets/robots/__init__.py b/source/isaaclab_assets/isaaclab_assets/robots/__init__.py
+index a451515608..4e73da6f10 100644
+--- a/source/isaaclab_assets/isaaclab_assets/robots/__init__.py
++++ b/source/isaaclab_assets/isaaclab_assets/robots/__init__.py
+@@ -24,3 +24,4 @@ from .shadow_hand import *
+ from .spot import *
+ from .unitree import *
+ from .universal_robots import *
++from .limx import *    
